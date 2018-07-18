@@ -17,7 +17,7 @@ doc_title: 'Notes on Singularity'
 
 # Author names, ordered as a list. Each author name should be formatted as 'First Last'
 authors:
-    - 'Hsin-Fang Chiang'
+    - 'Greg Daues, Hsin-Fang Chiang'
 
 # Current document revision date, YYYY-MM-DD
 # Only set this field if you need to manually fix the revision date;
@@ -34,7 +34,7 @@ authors:
 # doi: 10.5281/zenodo.#####
 
 # Copyright statement
-copyright: '2018, University of Illinois Champaign-Urbana'
+copyright: '2018, University of Illinois at Urbana-Champaign'
 
 # Description. A short, 1-2 sentence statemement used by document indices.
 description: 'Notes on running the Stack using Singularity'
