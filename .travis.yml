@@ -15,5 +15,6 @@ env:
   global:
     - LTD_MASON_BUILD=false  # disable builds in regular text matrix
     - LTD_MASON_PRODUCT="dmtn-089"
-    # Add AWS and LTD Keeper credentials as encrypted secrets here
-
+    # AWS and LTD Keeper credentials as encrypted secrets here
+    - secure: "eeySiekCoeGKnyf2pgCRFSbwpejcwktxzr+13ZyRNxtE6mtACOxNnEJPvvZ2Q//xgyEWDmqThDpupWM5T4O1V+iVOFw+IpbFIVR0Zmy/q7SC+qSWKhFbh9Tl//BA/cNsjOdjXbJiVtXB9SwAIE1L+O+Szl+bRaki8WBOhdgM2KoF+1Nj4vi92z8Web/qYl6iag/dsbjSDlAoV6Oj1v5PomlPdw0gSRxr8J7VveTwnvopoByp0qi0nvDcGud1Sq4jkhQSLBJVq+Qe70Ado/oJEazTnRfC0ojQAAunNug1gu+Ck4weyd+nRVKtKwU6/rGBOsoLe6X0y3YG5BacGafNyX3xpbVWnrepOWTAop46tuoU+N2ksmrgn5pfhKlqir55x9OJuH8Bu272/5SXfB4o1egce2sSNcPIAtcJ+fE7nKdsMH+oyRN1OdFXuenP529C3KluzyqAkgMUggHuzEQcO8fXLMFU3AtizkGq9+OaCCP6ABbXGe60+oQf2QgdSYB/rtPXOgNUmvmA2G7Cfv2rR0sU+TP0V82v7TiWsWTSQA5KHrzpDs6pQpf9NLjz6QABN0CwZuiH38f/VQMaQ9saCpW5rxCW/e4Lv1FD5Vn9U8hAD9OGLQ9At8ezvMphmma0xrQpVA0bc4zIs7trtg1DmFig49O+1hgdAsu8/aYd6nc="
+    - secure: "JAbC+2UrOsA49UJHBIsja0anB0l9puPG8wbwMAVx2cYWX/QRJ2Ic+TvafJWt4QehXzJRLtervJXdTFtZype/wLPKMm6KPXUr8ICi/7K0bzPB7C52eTB1gN+qZKzWeXB9yLoRuB5CToJV5NeQRs7hWyp+Q3bBT86kasZrEyZQOj1DRvR9RSSEDYZmdVTr/2KwTk4VENaFUiMyxmWKvyKBTQUAEJS+5HjMZk296E/xwpKxIKdTLDPq3LQjFRV1Aam0KcHz0YhDPI8jG4fdT0/aE1yerHVSkT02kC8/7JuYrmwCf5pnnuYlQRc+UsqX4f3CbzKbC4dg9Mzx/d4YF5msyS7hbpxn0sOSP0QiwMP27BEcSXFd+bZ8DQod9yVNYG5SFoxZL4A8kNFG5c/sVCLkwtE2AGdOjEY4IeBu9aRNmeJASDZXrIMnaMi+YLmOuq0NYAn779voW+vrmfG/bfa/6Xng9pg3iYbpjeZ9K2c+nwCzq3Hk4GZwqHZzRZYb0GO9sFXFJ4dm2NZQaVOWt0KH0/OymWQB4CLP79XS0GRLuhXWq7/FUzN1jsRXUqWLNticQmu8f5DlE3ij5hXnGf1kkXHvAO1+qEUDi5pG6maWWvrqGhowxgQjUyIads3zmrhjFb4NeCfjd/z9W8VfQjduavyKLx9DiMQiiHzRRqd4b9E="
