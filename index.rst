@@ -53,22 +53,19 @@
 .. Add content here.
 .. Do not include the document title (it's automatically added from metadata.yaml).
 
-#####################
-Singularity Use Cases
-#####################
 
-#. :ref:`singularity-intro`
-#. :ref:`singularity-image`
-#. :ref:`singularity-proc`
-#. :ref:`singularity-sfd`
-#. :ref:`singularity-htcondor-root`
+- :ref:`singularity-intro`
+- :ref:`singularity-image`
+- :ref:`singularity-proc`
+- :ref:`singularity-sfd`
+- :ref:`singularity-htcondor-root`
 
 .. _singularity-intro:
 
 Introduction to Singularity
 ===========================
 
-The Singularity container project (http://www.sylabs.io/) has commanded attention in the
+The `Singularity container project <http://www.sylabs.io/>`_ has commanded attention in the
 scientific world and the high performance computing (HPC) community.
 Singularity gives users the freedom to execute their customized applications, bundled with required dependencies,
 in an isolated context on HPC platforms without impacting the underlying system.
@@ -89,7 +86,10 @@ Because Singularity images are single files, they are easy to distribute, copy a
 Administering permissions for the container is reduced to standard file system permissions.
 The Singularity container images are compressed and consume relatively little disk space.
 
-A local Singularity image file can be created from an LSST project / science pipelines docker image on dockerhub utilizing ``singularity pull``.
+A local Singularity image file can be created from an LSST
+`Science Pipelines <https://pipelines.lsst.io>`_
+`docker <https://pipelines.lsst.io/install/docker.html>`_ image on
+`dockerhub <https://hub.docker.com/r/lsstsqre/centos/>`_ utilizing ``singularity pull``.
 An example of image generation is::
 
      singularity pull --name  "/home/daues/7-stack-lsst_distrib-v16.0.img" docker://lsstsqre/centos:7-stack-lsst_distrib-v16_0
@@ -100,7 +100,7 @@ An example of image generation is::
 Running processCcd.py with Singularity
 ======================================
 
-Processing with an LSST weekly or daily tag such as ``lsstsqre/centos:7-stack-lsst_distrib-w_2018_28`` on the Verification Cluster
+Processing with an LSST weekly or daily tag such as ``lsstsqre/centos:7-stack-lsst_distrib-w_2018_28`` on the `Verification Cluster <https://developer.lsst.io/services/verification.html>`_
 can be initiated promptly using Singularity.   A local container image can be created in a few minutes via::
 
      singularity pull --name  "/home/daues/7-stack-lsst_distrib-w_2018_28.img" docker://lsstsqre/centos:7-stack-lsst_distrib-w_2018_28
@@ -110,7 +110,7 @@ for each weekly/daily tag or release.
 With the container image present, a Slurm job can be submitted to the Verification Cluster that runs a ``singularity exec``
 to launch processing.  A simple example running processCcd is:
 
-.. code-block:: text
+.. code-block:: shell
 
      #!/bin/bash -l
      #SBATCH -p debug
@@ -121,11 +121,11 @@ to launch processing.  A simple example running processCcd is:
 
      singularity exec -B /datasets/:/datasets/ -B /project/:/project/ -B /scratch/:/scratch/ -B /home/:/home/  /home/daues/7-stack-lsst_distrib-w_2018_23.img /home/daues/run_ProcessCcd.sh
 
-In this example a wrapper script `run_ProcessCcd.sh` is executed within the container;
+In this example a wrapper script ``run_ProcessCcd.sh`` is executed within the container;
 it initializes the stack under ``/opt/lsst``
 within the container and runs the desired command line:
 
-.. code-block:: text
+.. code-block:: shell
 
      #!/bin/bash
      source /opt/lsst/software/stack/loadLSST.bash
@@ -144,11 +144,12 @@ SingleFrameDriver in SMP mode with Singularity
 
 In this section we show one approach to use Singularity for processing at a more significant scale,
 sufficient to fully utilize a single multi-core node.
-This example runs the ``singleFrameDriver`` of ``ctrl_pool`` in SMP mode within the context of
+This example runs ``singleFrameDriver``, a ``ctrl_pool``-style pipeline driver
+(`DMTN-023 <https://dmtn-023.lsst.io>`_), in SMP mode within the context of
 a ``singularity exec``.  We write a Slurm job description to launch the ``singularity exec``
 on a compute node of the Verification Cluster:
 
-.. code-block:: text
+.. code-block:: shell
 
 
      #!/bin/bash -l
@@ -160,7 +161,7 @@ on a compute node of the Verification Cluster:
 
      singularity exec -B /datasets/:/datasets/ -B /project/:/project/ -B /scratch/:/scratch/ -B /home/:/home/  /home/daues/singularity/images/7-stack-lsst_distrib-w_2018_23.img /home/daues/run_singleFrameDriver_192.sh
 
-A wrapper script `run_singleFrameDriver_192.sh` is executed within the container, initializing the stack and running the
+A wrapper script :file:`run_singleFrameDriver_192.sh` is executed within the container, initializing the stack and running the
 ``singleFrameDriver`` command line:
 
 .. code-block:: text
@@ -172,9 +173,9 @@ A wrapper script `run_singleFrameDriver_192.sh` is executed within the container
 
 
 We note that an option ``--mpiexec "-launcher ssh"`` is included on the ``singleFrameDriver`` command line.
-Without this option, we observe the internal `mpiexec` of the ``singleFrameDriver --batch-type smp`` to attempt to use
-the slurm launcher, but this fails because the slurm commands such as `srun` are not present within the container.
-We work around this by designating an alternative launcher for the `mpiexec`.
+Without this option, we observe the internal ``mpiexec`` of the ``singleFrameDriver --batch-type smp`` to attempt to use
+the slurm launcher, but this fails because the slurm commands such as ``srun`` are not present within the container.
+We work around this by designating an alternative launcher for the ``mpiexec``.
 
 .. _singularity-htcondor-root:
 
@@ -182,7 +183,7 @@ Configuring HTCondor to run Singularity Jobs
 ============================================
 
 In this section we consider the context of an HTCondor pool with admin/root level installations.
-An HTCondor worker node (i.e., running a `startd` daemon) can be configured to run jobs within
+An HTCondor worker node (i.e., running a ``startd`` daemon) can be configured to run jobs within
 individual slots that are comprised
 of a Singularity container.  Sample additions to the HTCondor configuration file (typically located at
 ``/etc/condor/condor_config.local``) are:
@@ -197,7 +198,7 @@ of a Singularity container.  Sample additions to the HTCondor configuration file
     SINGULARITY_TARGET_DIR = /srv
     SINGULARITY_BIND_EXPR = "/home,/scratch,/data"
 
-When the HTCondor `startd` runs with these settings a machine ad ``HasSingularity``
+When the HTCondor ``startd`` runs with these settings a machine ad ``HasSingularity``
 will be displayed on submit nodes:
 
 
@@ -262,9 +263,9 @@ image (i.e., a ``singularity pull`` thereof) is used.
 In order to guarantee that this job runs on a worker node that supports Singularity,
 we include the Requirements clause for HAS_SINGULARITY.
 Serving as the executable of this job, an example wrapper script
-`setupLSSTStack.sh` is used to run commands inside the container:
+:file:`setupLSSTStack.sh` is used to run commands inside the container:
 
-.. code-block:: text
+.. code-block:: shell
 
    #!/bin/bash
    source  /opt/lsst/software/stack/loadLSST.bash
